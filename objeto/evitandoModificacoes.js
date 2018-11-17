@@ -24,6 +24,6 @@ delete pessoa.nome;
 pessoa.idade = 32;
 console.log(pessoa);
 
-//Object.freeze ==== Objeto totalmente selado;
+Object.freeze //Objeto totalmente selado;
 
 
