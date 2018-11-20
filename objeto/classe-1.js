@@ -13,6 +13,31 @@ class CicloFinanceiro {
     }
 
     addLancamentos(...lancamentos) {
-        lancamentos.forEach(l => lancamentos.push(l));
+        lancamentos.forEach(l => this.lancamentos.push(l));
+    }
+
+    sumerio() {
+        let valorConsolidado = 0;
+        this.lancamentos;
+        this.lancamentos.forEach(l => {valorConsolidado += l.valor});
+        return valorConsolidado;
+
     }
 }
+
+const salario = new Lancamento('Salario', 45000);
+const contaLuz = new Lancamento('Luz', -220);
+
+const contas = new CicloFinanceiro(6, 2018);
+contas.addLancamentos(salario, contaLuz);
+
+console.log(contas.sumerio());
+
+
+
+
+
+
+
+
+
