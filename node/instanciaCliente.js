@@ -12,4 +12,4 @@ instanciaD = require('./instanciaNova')();
 instanciaC.inc();
 instanciaC.inc();
 
-console.log(instanciaC.valor, instanciaD.valor)
+console.log(instanciaC.valor, instanciaD.valor);
