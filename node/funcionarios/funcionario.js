@@ -6,7 +6,7 @@ const axios = require('axios');
 const chinesas = f => f.pais === 'China';
 const mulheres = f => f.genero === 'F';
 const menorSalario = (f, fAtaul) => {
-    return (f.salario < fAtaul.salario) ? f : fAtaul;
+    return (f.salario > fAtaul.salario) ? f : fAtaul;
 }
 
 
