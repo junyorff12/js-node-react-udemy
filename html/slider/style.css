@@ -1,0 +1,18 @@
+.container{
+  overflow: hidden;
+}
+
+img {
+  width: 33.33%;
+  height: 350px;
+  display: inline;
+  float: left;
+  overflow: hidden;
+}
+
+.slider {
+  width: 320%;
+}
+
+
+
