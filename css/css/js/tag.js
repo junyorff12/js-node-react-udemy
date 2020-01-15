@@ -1,7 +1,7 @@
 
 const colors = {
     p: '#388e3c',
-    div: '1565c0',
+    div: '#1565c0',
     span: '#e53935',
     section: '#f67809',
     ul: '#5e35b1',
@@ -17,18 +17,32 @@ const colors = {
         return this[tag] ? this[tag]: this.padrao;
     }
 }
+/* 
+    Assim funciona em qualquer browser
+*/
+/* const elementos = document.getElementsByClassName('tag');
+Array.prototype.forEach.call(elementos, function(el){
+    const nameOfTag = el.tagName.toLowerCase();
+    el.style.borderColor = colors.getColor(nameOfTag);
+    if(!el.classList.contains('nolabel')){
+        const label = document.createElement('label');
+        label.innerHTML = nameOfTag;
+        label.style.backgroundColor = colors.getColor(nameOfTag);
+        el.insertBefore(label, el.childNodes[0]);
+    }
+})  */
 
-
-
-document.querySelectorAll('.tag').forEach(elemento => {
-    const nameTag = elemento.tagName.toLowerCase();
-
-    elemento.style.borderColor = colors.getColor(nameTag);
-
-    if(!elemento.classList.contains('nolabel')){
-        let label = document.createElement('label');
-        label.style.backgroundColor = colors.getColor(nameTag);
-        label.innerHTML = nameTag;
-        elemento.insertBefore(label, elemento.firstChild);
+/* 
+Mas prefiro assim, (moderno)
+ */
+const elementos = document.getElementsByClassName('tag');
+[...elementos].forEach(el => {
+    const nameOfTag = el.tagName.toLowerCase();
+    el.style.borderColor = colors.getColor(nameOfTag);
+    if(!el.classList.contains('nolabel')){
+        const label = document.createElement('label');
+        label.innerHTML = nameOfTag;
+        label.style.backgroundColor = colors.getColor(nameOfTag);
+        el.insertBefore(label, el.childNodes[0]);
     }
 })
