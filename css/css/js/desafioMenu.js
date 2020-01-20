@@ -1,13 +1,12 @@
 'use strict';
 
-let hash = window.location.hash.slice(1);
+window.onhashchange = function(e) {
+    const oldHash = e.oldURL.split('#')[1];
+    const newHash = e.newURL.split('#')[1];
+    console.log(oldHash, newHash);
+    const oldMenu = document.querySelector(`.menu a[href='#${oldHash}']`);
+    const newMenu = document.querySelector(`.menu a[href='#${newHash}']`);
 
-document.querySelectorAll('[data-js="menu-item"]').forEach(item => {
-    item.classList.add(item.textContent);
-    if(item.classList.contains(hash)){
-        item.style.backgroundColor = 'red';
-    }
-})
-
-
-
+    oldMenu && oldMenu.classList.remove('selected');
+    newMenu && newMenu.classList.add('selected'); 
+}
