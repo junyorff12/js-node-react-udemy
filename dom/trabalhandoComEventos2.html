@@ -8,8 +8,18 @@
 </head>
 
 <body class="conteudo exercicio">
-    <div>Elemento</div>
+    <div data-js="moveOnClick">Elemento</div>
     <script>
-        // ...
+        const componente = document.querySelector('[data-js="moveOnClick"]');
+        componente.style.position = 'absolute';
+
+        componente.addEventListener('mousemove', e => {
+            e.target.style.cursor = 'move';
+            if(e.buttons){
+                e.target.style.top = `${e.clientY - (e.target.clientHeight / 2)}px`;
+                e.target.style.left = `${e.clientX - (e.target.clientWidth / 2)}px`;
+            }
+
+        })
     </script>
 </body>
