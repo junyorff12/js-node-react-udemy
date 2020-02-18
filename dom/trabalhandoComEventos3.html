@@ -45,7 +45,28 @@
     </div>
     <div class="direita" wm-dropzone></div>
     <script>
-        // ...
+        const items = document.querySelectorAll('[wm-dropzone] .item')
+        items.forEach((item, index) => {
+            item.draggable = true;
+            item.id = item.id || `draggable-item-${index}`;
+
+            item.addEventListener('dragstart', e => {
+                e.dataTransfer.setData('item-id', e.target.id); 
+            })
+
+            const dragzones = document.querySelectorAll('[wm-dropzone]');
+            dragzones.forEach(dragzone => {
+                dragzone.ondragover = e => e.preventDefault();
+                dragzone.addEventListener('drop', e => {
+                    const id = e.dataTransfer.getData('item-id');
+                    const itemToDrop = document.getElementById(id);
+                    //e.target.appendChild(itemToDrop);
+                    dragzone.appendChild(itemToDrop);
+                })
+            })
+
+
+        })
     </script>
 </body>
 

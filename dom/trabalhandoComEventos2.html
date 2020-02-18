@@ -10,16 +10,18 @@
 <body class="conteudo exercicio">
     <div data-js="moveOnClick">Elemento</div>
     <script>
-        const componente = document.querySelector('[data-js="moveOnClick"]');
-        componente.style.position = 'absolute';
+        const element = document.querySelector('[data-js="moveOnClick"]');
+        element.style.position = 'absolute';
 
-        componente.addEventListener('mousemove', e => {
+        element.addEventListener('mousemove', e => {
             e.target.style.cursor = 'move';
+
             if(e.buttons){
                 e.target.style.top = `${e.clientY - (e.target.clientHeight / 2)}px`;
                 e.target.style.left = `${e.clientX - (e.target.clientWidth / 2)}px`;
             }
 
         })
+      
     </script>
 </body>
