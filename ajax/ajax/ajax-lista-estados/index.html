@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Estados</h1>
+  <div>
+    <button id="buscarEstados" type="submit">Buscar</button>
+  </div>
+  <script>
+    const buscarEstados = document.getElementById('buscarEstados');
+
+    const ajax = new XMLHttpRequest();
+    ajax.open('GET', 'dados/estados.json', true);
+    
+    buscarEstados.onclick = e => {
+      e.preventDefault();
+      console.log('clickado');
+      if(ajax.status === 200){
+        handleAjaxSuccess(ajax.response);
+      } else if (ajax.status >= 400){
+        handleAjaxError(ajax.status, ajax.statusText);
+      }
+    }
+
+    ajax.send();
+
+    function handleAjaxSuccess(response){
+      const estados = JSON.parse(response);
+      createTable(estados);
+    }
+
+    function handleAjaxError(status, code){
+      const div = document.createTextNode(`${status} : ${code}`);
+      document.body.appendChild(div);
+
+    }
+
+    function createTable(estados) {
+      const linhas = estados.map(estado => {
+       
+        const tdId = document.createElement('td');
+        tdId.innerHTML = estado.id;
+
+        const tdName = document.createElement('td');
+        tdName.innerHTML = estado.nome;
+
+        const tdUF = document.createElement('td');
+        tdUF.innerHTML = estado.sigla;
+
+        const tr = document.createElement('tr');
+
+        tr.appendChild(tdId);
+        tr.appendChild(tdName);
+        tr.appendChild(tdUF);
+
+        return tr;
+
+      });
+
+      const table = document.createElement('table');
+      linhas.forEach(linha => table.appendChild(linha));
+
+      document.body.appendChild(table);
+    }
+
+  </script>
+</body>
+</html>
