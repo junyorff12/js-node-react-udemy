@@ -14,6 +14,39 @@
             <a href="index.html" style="text-decoration: none;">Voltar</a></button>
     </div>
     <script>
-        // ...
+        function ajaxXML(config) {
+            const xhr = new XMLHttpRequest();
+            xhr.open( config.metodo, config.url, true );
+
+            xhr.onreadystatechange = e => {
+                if (xhr.status === 200 && xhr.readyState === 4) {
+                    config.sucesso(xhr.responseXML);
+                } else if (xhr.status >= 400){
+                    config.erro({
+                        status: xhr.status,
+                        text: xhr.statusText
+                    })
+                }
+            }
+
+            xhr.send();
+        }
+
+        ajaxXML({
+            url: 'dados/estados.xml',
+            metodo: 'get',
+            sucesso( resposta ) {
+                const estados = resposta.getElementsByTagName('estado');
+                const items = Array.from(estados).reduce(
+                    (html, estado) => html + `<li>${estado.attributes.nome.value}</li>` , ''
+                )
+
+                document.body.insertAdjacentHTML('beforeend', `<ul>${items}</ul>`);
+            },
+            erro(e) {
+                const msg = document.createTextNode(`${e.status}-${e.text}`);
+                document.body.appendChild(msg);
+            }
+        })
     </script>
 </body>
