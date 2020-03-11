@@ -17,6 +17,35 @@
             <a href="index.html" style="text-decoration: none;">Voltar</a></button>
     </div>
     <script>
-        // ...
+        function exibirResultado(id, dados) {
+            const texto = JSON.stringify(dados);
+            document.getElementById(id).innerHTML = texto;
+        }
+
+        $.ajax({
+            url: 'parOuImpar',
+            data: {
+                numero: 5
+            },
+            success(data){
+                exibirResultado('get', data);
+            }
+
+        })
+
+        $.ajax({
+            url: 'formulario',
+            method: 'post',
+            data: {
+                nome: 'jr',
+                sobrenome: 'ff12'
+            },
+            success(data){
+                exibirResultado('post', data);
+            },
+            error(e){
+                exibirResultado('post', e);
+            }
+        })
     </script>
 </body>

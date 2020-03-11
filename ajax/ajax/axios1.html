@@ -10,12 +10,14 @@
 
 <body class="conteudo exercicio">
     <h1>Estados</h1>
-    <div>
-        <button type="submit" style="border-radius: 5px; margin: 10px; padding: 10px;">
-            <a href="index.html" style="text-decoration: none;">Voltar</a></button>
-    </div>
-
+    
     <script>
-        // ...
+        const url = 'dados/estados.json';
+        axios(url).then( res => {
+            const itens = res.data.reduce(
+                (html, estado) => html + `<li>${estado.nome}</li>`, ''
+            )
+            document.body.insertAdjacentHTML('beforeEnd', `<ul>${itens}</ul>`);
+        })
     </script>
 </body>
