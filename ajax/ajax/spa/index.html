@@ -25,6 +25,32 @@
     </nav>
     <div class="pagina"></div>
     <script>
-        // ...
+        function navegarVidaAjax(url, seletor, push = true){
+            if (!url || !seletor) return;
+            fetch(url)
+                .then(link => link.text())
+                .then(text => {
+                    document.querySelector('.pagina').innerHTML = text;
+                    if(push) {
+                        history.pushState({seletor}, null, url );
+                    }
+                })
+        }
+
+        document.querySelectorAll('[wm-link]').forEach((link) => {
+            const url = link.attributes['wm-link'].value;
+            const destino = link.attributes['wm-destino'].value
+
+            link.onclick = e => {
+                e.preventDefault();
+                navegarVidaAjax(url, destino);
+            }
+        });
+
+        window.onpopstate = e => {
+            if(e.state){
+                navegarVidaAjax(window.location.href, e.state.seletor, false);
+            }
+        }
     </script>
 </body>
